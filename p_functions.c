@@ -101,10 +101,20 @@ int p_decimal(va_list args)
 int p_integer(va_list args)
 {
 	int num;
+	int len;
 
+	len = 0;
 	num = va_arg(args, int);
 
-	return (0);
+	/* handle negative numbers */
+	if (num < 0)
+	{
+		_putchar('-');
+		num = num * -1;
+		len++;
+	}
+
+	return (len);
 }
 
 /**
@@ -113,7 +123,7 @@ int p_integer(va_list args)
  * Return: always 0
  */
 
-int p_nil(va_list args)
+int p_nil(va_list args __attribute__((unused)))
 {
 	return (0);
 }
