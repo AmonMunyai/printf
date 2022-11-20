@@ -18,24 +18,32 @@ int _printf(const char *format, ...)
 		{NULL, NULL}
 	};
 
+	if (format == NULL)
+		return (-1);
+
 	i = 0;
 	len = 0;
 	va_start(args, format);
 
-	while (format[i] != '\0' && format)
+	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
+			i++;
 			j = 0;
+			if (format[i] == '%') /* for double %'s */
+			{
+				len++;
+			}
+
 			while (f_spec[j].spec != NULL)
 			{
-				if (format[i + 1] == f_spec[j].spec[0])
+				if (format[i] == f_spec[j].spec[0])
 					break;
 				j++;
 			}
 			if (j < 3)
 				len += f_spec[j].f(args);
-			i++;
 		}
 		else
 		{
