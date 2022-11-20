@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * convert_specifier - writes output to stdout according to specifier
@@ -16,18 +15,14 @@ int convert_specifier(const char specifier, va_list args, int *t_length)
 	length = 0, temp = 0;
 
 	if (specifier == '%') /* handle double %'s */
-	{
-		_putchar(specifier);
-		length++;
-	}
+		length += _putchar(specifier);
+
 	else
 	{
 		temp = (*get_p(specifier))(args);
 		if (temp == 0) /* handle invalid id's */
-		{
-			_putchar('%');
-			temp++;
-		}
+			temp += _putchar('%');
+
 		length += temp;
 	}
 	*(t_length) += length;
@@ -55,10 +50,7 @@ int _printf(const char *format, ...)
 	for (index = 0, t_length = 0; format[index] != '\0'; index++)
 	{
 		if (format[index] != '%')
-		{
-			_putchar(format[index]); /* write to stdout */
-			t_length++;
-		}
+			t_length += _putchar(format[index]); /* write to stdout */
 		else
 		{
 			index++;

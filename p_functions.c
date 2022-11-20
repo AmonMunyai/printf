@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * p_char - writes a character to stdout
@@ -9,14 +8,7 @@
 
 int p_char(va_list args)
 {
-	char c;
-
-	c = va_arg(args, int);
-
-	if (c == '\0' || c == 0)
-		return (0);
-	_putchar(c);
-
+	_putchar(va_arg(args, int));
 	return (1);
 }
 
@@ -29,19 +21,14 @@ int p_char(va_list args)
 
 int p_string(va_list args)
 {
-	int index;
 	char *s;
 
-	index = 0;
 	s = va_arg(args, char *);
 
-	while (s[index] != '\0')
-	{
-		_putchar(s[index]);
-		index++;
-	}
+	if (s == NULL)
+		s = "(nil)";
 
-	return (index);
+	return (_puts(s));
 }
 
 /**
@@ -52,10 +39,7 @@ int p_string(va_list args)
 
 int p_decimal(va_list args)
 {
-	int num;
-	int index;
-	int temp;
-	int len;
+	int num, index, temp, len;
 	char *nb;
 
 	nb = malloc(sizeof(*nb) * 1024);

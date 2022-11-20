@@ -4,8 +4,10 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-int _putchar(char c);
+/* main function */
 int _printf(const char *format, ...);
+
+int covert_specifier(const char specifier, va_list args, int *t_length);
 
 /**
  * struct p - Struct p
@@ -19,15 +21,18 @@ typedef struct p
         int (*f)(va_list);
 } op_t;
 
+/* print functions  */
 int p_char(va_list args);
 int p_string(va_list args);
 int p_decimal(va_list args);
 int p_integer(va_list args);
-
 int p_nil(va_list args);
 
 int (*get_p(char s))(va_list);
 
+/* helper functions */
+int _putchar(char c);
+int _puts(const char *s);
 int _strlen(const char *s);
 
 #endif /* MAIN_H */

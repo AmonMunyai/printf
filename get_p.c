@@ -1,9 +1,8 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * get_p - selects the correct function to perform specifier conversion
- * @s: conversion specifier to perfom
+ * get_p - selects the correct function to perform
+ * @s: specifies the type of conversion to be applied
  * Return: pointer to function corresponding to conversion specifier
  */
 
