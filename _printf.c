@@ -1,59 +1,50 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
  * _printf - writes output stdout according to a format
  * @format: output to write
  * Return: the number of characters printed
- * 	(excluding the null byte used to end output to strings)
+ *      (excluding the null byte used to end output to strings)
  */
 
 int _printf(const char *format, ...)
 {
-	int i, j;
-	int len;
+	int index;
+	int t_length;
 	va_list args;
-	conv_t f_spec[] = {
-		{"c", p_char},
-		{"s", p_string},
-		{NULL, NULL}
-	};
 
 	if (format == NULL)
 		return (-1);
 
-	i = 0;
-	len = 0;
+	index = 0;
+	t_length = 0;
 	va_start(args, format);
 
-	while (format[i] != '\0')
+	while (format[index] != '\0')
 	{
-		if (format[i] == '%')
+		/* handle % */
+		if (format[index] == '%')
 		{
-			i++;
-			j = 0;
-			if (format[i] == '%') /* for double %'s */
-			{
-				len++;
-			}
+			/* % at end of string format */
+			if (format[index + 1] == '\0')
+				break;
 
-			while (f_spec[j].spec != NULL)
+			/* double %'s */
+			if (format[index + 1] != '%')
 			{
-				if (format[i] == f_spec[j].spec[0])
-					break;
-				j++;
+				/* convert specifier */
+				t_length += (*get_p(format[index + 1]))(args);
+				index++;
 			}
-			if (j < 3)
-				len += f_spec[j].f(args);
+			index++;
 		}
-		else
-		{
-			_putchar(format[i]); /* write character to stdout */
-			len++;
-		}
-		i++;
+
+		/* write to stdout */
+		_putchar(format[index++]);
+		t_length++;
 	}
-
 	va_end(args);
 
-	return (len);
+	return (t_length);
 }

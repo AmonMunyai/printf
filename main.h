@@ -1,29 +1,33 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdio.h> /* for testing */
-
-#include <stdarg.h> /* va_list */
-#include <stdlib.h> /* NULL */
+#include <stdarg.h>
+#include <stdlib.h>
 
 int _putchar(char c);
 int _printf(const char *format, ...);
 
-int p_char(va_list args);
-int p_string(va_list args);
-
 /**
- * struct conv - holds conversion specifier,
- * and corresponding function
- * @spec: conversion specifier
- * @f: pointer to function correspending with
- * conversion specifier
+ * struct p - Struct p
+ * @s: the conversion specifier
+ * @f: the function associated
  */
 
-typedef struct conv
+typedef struct p
 {
-	char *spec;
-	int (*f)(va_list);
-} conv_t;
+        char *s;
+        int (*f)(va_list);
+} op_t;
+
+int p_char(va_list args);
+int p_string(va_list args);
+int p_decimal(va_list args);
+int p_integer(va_list args);
+
+int p_nil(va_list args);
+
+int (*get_p(char s))(va_list);
+
+int _strlen(const char *s);
 
 #endif /* MAIN_H */
