@@ -7,8 +7,6 @@
 /* main function */
 int _printf(const char *format, ...);
 
-int covert_specifier(const char specifier, va_list args, int *t_length);
-
 /**
  * struct p - Struct p
  * @s: the conversion specifier
@@ -26,7 +24,6 @@ int p_char(va_list args);
 int p_string(va_list args);
 int p_decimal(va_list args);
 int p_integer(va_list args);
-int p_nil(va_list args);
 
 int (*get_p(char s))(va_list);
 

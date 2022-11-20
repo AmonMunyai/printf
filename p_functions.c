@@ -90,14 +90,3 @@ int p_integer(va_list args)
 
 	return (len);
 }
-
-/**
- * p_nil - handles invalid id's
- * @args: variable argument list
- * Return: always 0
- */
-
-int p_nil(va_list args __attribute__((unused)))
-{
-	return (0);
-}

@@ -13,7 +13,7 @@ int (*get_p(char s))(va_list)
 		{"s", p_string},
 		{"d", p_decimal},
 		{"i", p_integer},
-		{NULL, p_nil}
+		{NULL, NULL}
 	};
 
 	int index;
