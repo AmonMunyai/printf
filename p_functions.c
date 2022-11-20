@@ -9,47 +9,53 @@
 
 int p_char(va_list args)
 {
-        char c;
+	char c;
 
-        c = va_arg(args, int);
+	c = va_arg(args, int);
 
 	if (c == '\0' || c == 0)
 		return (0);
+	_putchar(c);
 
-        _putchar(c);
-
-        return (1);
+	return (1);
 }
 
 /**
  * p_string - writes a string to stdout, without
  * its terminating null byte ('\0')
  * @args: variable argument list
- * Return: length of string
+ * Return: the length of the string written to stdout
  */
 
 int p_string(va_list args)
 {
-        int index;
-        char *s;
+	int index;
+	char *s;
 
-        index = 0;
-        s = va_arg(args, char *);
+	index = 0;
+	s = va_arg(args, char *);
 
-        while (s[index] != '\0')
-        {
-                _putchar(s[index]);
-                index++;
-        }
+	while (s[index] != '\0')
+	{
+		_putchar(s[index]);
+		index++;
+	}
 
-        return (index);
+	return (index);
 }
+
+/**
+ * p_decimal - writes a base 10 number to stdout as string
+ * @args: variable argument list
+ * Return: number of bytes in string number
+ */
 
 int p_decimal(va_list args)
 {
 	int num;
 	int index;
 	int temp;
+	int len;
 	char *nb;
 
 	nb = malloc(sizeof(*nb) * 1024);
@@ -57,6 +63,7 @@ int p_decimal(va_list args)
 		return (-1);
 
 	index = 0;
+	len = 0;
 	num = va_arg(args, int);
 
 	/* handle negative numbers */
@@ -64,6 +71,7 @@ int p_decimal(va_list args)
 	{
 		_putchar('-');
 		num = num * -1;
+		len++;
 	}
 
 	/* convert num to string */
@@ -73,23 +81,37 @@ int p_decimal(va_list args)
 		temp = temp / 10; /* remove last digit */
 	}
 	nb[index] = '\0';
-	
+
 	/* write number to stdout */
 	for (index = _strlen(nb); index >  0; index--)
 	{
 		_putchar(nb[index - 1]);
+		len++;
 	}
-	
-	return (0);
+
+	return (len);
 }
+
+/**
+ * p_integer - writes number to stdout as string
+ * @args: variable argument list
+ * Return: number of bytes written to stdout
+ */
+
 int p_integer(va_list args)
 {
 	int num;
 
 	num = va_arg(args, int);
-	
+
 	return (0);
 }
+
+/**
+ * p_nil - handles invalid id's
+ * @args: variable argument list
+ * Return: always 0
+ */
 
 int p_nil(va_list args)
 {

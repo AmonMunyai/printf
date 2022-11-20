@@ -21,6 +21,6 @@ int (*get_p(char s))(va_list)
 
 	for (index = 0; ops[index].s != NULL && *(ops[index].s) != s; index++)
 		;
-	
+
 	return (ops[index].f);
 }
