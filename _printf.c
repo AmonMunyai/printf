@@ -45,9 +45,12 @@ int _printf(const char *format, ...)
 			}
 			index++;
 		}
-		/* write to stdout */
-		_putchar(format[index++]);
-		t_length++;
+		else
+		{
+			/* write to stdout */
+			_putchar(format[index++]);
+			t_length++;
+		}
 	}
 	va_end(args);
 
