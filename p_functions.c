@@ -100,19 +100,9 @@ int p_decimal(va_list args)
 
 int p_integer(va_list args)
 {
-	int num;
 	int len;
 
-	len = 0;
-	num = va_arg(args, int);
-
-	/* handle negative numbers */
-	if (num < 0)
-	{
-		_putchar('-');
-		num = num * -1;
-		len++;
-	}
+	len = p_decimal(args);
 
 	return (len);
 }

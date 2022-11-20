@@ -2,6 +2,40 @@
 #include <stdio.h>
 
 /**
+ * convert_specifier - writes output to stdout according to specifier
+ * @specifier: specifies the type of conversion to be applied
+ * @args: variable argument list
+ * @t_length: pointer to int
+ * Return: the number of characters printed
+ */
+
+int convert_specifier(const char specifier, va_list args, int *t_length)
+{
+	int length, temp;
+
+	length = 0, temp = 0;
+
+	if (specifier == '%') /* handle double %'s */
+	{
+		_putchar(specifier);
+		length++;
+	}
+	else
+	{
+		temp = (*get_p(specifier))(args);
+		if (temp == 0) /* handle invalid id's */
+		{
+			_putchar('%');
+			temp++;
+		}
+		length += temp;
+	}
+	*(t_length) += length;
+
+	return (length);
+}
+
+/**
  * _printf - writes output stdout according to a format
  * @format: output to write
  * Return: the number of characters printed
@@ -20,7 +54,6 @@ int _printf(const char *format, ...)
 
 	for (index = 0, t_length = 0; format[index] != '\0'; index++)
 	{
-		/* handle % */
 		if (format[index] != '%')
 		{
 			_putchar(format[index]); /* write to stdout */
@@ -32,16 +65,7 @@ int _printf(const char *format, ...)
 			if (format[index] == '\0') /* % at end of string format */
 				break;
 
-			if (format[index] == '%') /* double %'s */
-			{
-				_putchar(format[index]);
-				t_length++;
-			}
-			else
-			{
-				/* convert specifier */
-				t_length += (*get_p(format[index]))(args);
-			}
+			convert_specifier(format[index], args, &t_length);
 		}
 	}
 	va_end(args);
