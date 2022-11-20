@@ -10,46 +10,38 @@
 
 int _printf(const char *format, ...)
 {
-	int index;
-	int t_length;
+	int index, t_length;
 	va_list args;
 
 	if (format == NULL)
 		return (-1);
 
-	index = 0;
-	t_length = 0;
 	va_start(args, format);
 
-	while (format[index] != '\0')
+	for (index = 0, t_length = 0; format[index] != '\0'; index++)
 	{
 		/* handle % */
-		if (format[index] == '%')
+		if (format[index] != '%')
 		{
-			/* % at end of string format */
-			if (format[index + 1] == '\0')
+			_putchar(format[index]); /* write to stdout */
+			t_length++;
+		}
+		else
+		{
+			index++;
+			if (format[index] == '\0') /* % at end of string format */
 				break;
 
-			/* double %'s */
-			if (format[index + 1] == '%')
+			if (format[index] == '%') /* double %'s */
 			{
-				_putchar('%');
-				index++;
+				_putchar(format[index]);
 				t_length++;
 			}
 			else
 			{
 				/* convert specifier */
-				t_length += (*get_p(format[index + 1]))(args);
-				index++;
+				t_length += (*get_p(format[index]))(args);
 			}
-			index++;
-		}
-		else
-		{
-			/* write to stdout */
-			_putchar(format[index++]);
-			t_length++;
 		}
 	}
 	va_end(args);
