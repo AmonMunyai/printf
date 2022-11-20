@@ -31,7 +31,13 @@ int _printf(const char *format, ...)
 				break;
 
 			/* double %'s */
-			if (format[index + 1] != '%')
+			if (format[index + 1] == '%')
+			{
+				_putchar('%');
+				index++;
+				t_length++;
+			}
+			else
 			{
 				/* convert specifier */
 				t_length += (*get_p(format[index + 1]))(args);
@@ -39,7 +45,6 @@ int _printf(const char *format, ...)
 			}
 			index++;
 		}
-
 		/* write to stdout */
 		_putchar(format[index++]);
 		t_length++;
