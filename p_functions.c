@@ -73,6 +73,8 @@ int p_decimal(va_list args)
 		len++;
 	}
 
+	free(nb);
+
 	return (len);
 }
 
