@@ -4,7 +4,7 @@
  * _printf - writes output stdout according to a format
  * @format: output to write
  * Return: the number of characters printed
- * 	(excluding the null byte used to end output to strings)
+ *      (excluding the null byte used to end output to strings)
  */
 
 int _printf(const char *format, ...)
