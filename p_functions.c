@@ -39,7 +39,8 @@ int p_string(va_list args)
 
 int p_decimal(va_list args)
 {
-	int num, index, temp, len;
+	int num, index, len;
+	unsigned int temp;
 	char *nb;
 
 	nb = malloc(sizeof(*nb) * 1024);
@@ -59,7 +60,7 @@ int p_decimal(va_list args)
 	}
 
 	/* convert num to string */
-	for (index = 0, temp = num; temp > 0; index++)
+	for (index = 0, temp = (unsigned int) num; temp > 0; index++)
 	{
 		nb[index] = (temp % 10) + '0'; /* get last digit */
 		temp = temp / 10; /* remove last digit */
@@ -86,9 +87,43 @@ int p_decimal(va_list args)
 
 int p_integer(va_list args)
 {
-	int len;
+	int num, index, len;
+	char *str_n;
+	char *buffer = "0123456789abcdef";
+	unsigned int temp;
 
-	len = p_decimal(args);
+	str_n = malloc(sizeof(*str_n) * 1024);
+	if (str_n == NULL)
+		return (-1);
+
+	index = 0;
+	len = 0;
+	num = va_arg(args, int);
+
+	/* handle negative numbers */
+	if (num < 0)
+	{
+		_putchar('-');
+		num = num * -1;
+		len++;
+	}
+
+	/* convert num to string */
+	for (index = 0, temp = (unsigned int) num; temp > 0; index++)
+	{
+		str_n[index] = buffer[temp % 10]; /* get last digit */
+		temp /= 10; /* remove last digit */
+	}
+	str_n[index] = '\0';
+
+	/* write number to stdout */
+	for (index = _strlen(str_n); index > 0; index--)
+	{
+		_putchar(str_n[index - 1]);
+		len++;
+	}
+
+	free(str_n);
 
 	return (len);
 }
