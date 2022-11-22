@@ -57,12 +57,14 @@ int _strlen(const char *s)
 int (*get_p(char s))(va_list)
 {
 	int index;
-	op_t ops[] = {{"c", p_char},
+	op_t ops[] = {
+		{"c", p_char},
 		{"s", p_string},
 		{"S", p_stringS},
 		{"d", p_decimal},
 		{"i", p_integer},
 		{"b", p_binary},
+		{"r", p_rev},
 		{NULL, NULL}
 	};
 
