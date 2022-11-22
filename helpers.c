@@ -65,6 +65,7 @@ int (*get_p(char s))(va_list)
 		{"i", p_integer},
 		{"b", p_binary},
 		{"r", p_rev},
+		{"R", p_rot13},
 		{NULL, NULL}
 	};
 

@@ -24,6 +24,7 @@ int p_char(va_list args);
 int p_string(va_list args);
 int p_stringS(va_list args);
 int p_rev(va_list args);
+int p_rot13(va_list args);
 
 int print_number(int num, int base, char *buffer);
 int p_decimal(va_list args);
