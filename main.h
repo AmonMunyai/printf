@@ -25,6 +25,9 @@ int p_string(va_list args);
 int p_decimal(va_list args);
 int p_integer(va_list args);
 int p_binary(va_list args);
+int p_stringS(va_list args);
+
+int print_number(int num, int base, char *buffer);
 
 int (*get_p(char s))(va_list);
 
