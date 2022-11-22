@@ -38,7 +38,10 @@ int p_rot13(va_list args)
 
 	s = va_arg(args, char *);
 	if (s == NULL)
-		s = "(null)";
+	{
+		len = _puts("(ahyy)");
+		return (len);
+	}
 
 	len = 0;
 	for (index = 0; *(s + index) != '\0'; index++)
