@@ -60,12 +60,20 @@ int p_decimal(va_list args)
 	}
 
 	/* convert num to string */
-	for (index = 0, temp = (unsigned int) num; temp > 0; index++)
+	if (num == 0)
 	{
-		nb[index] = (temp % 10) + '0'; /* get last digit */
-		temp = temp / 10; /* remove last digit */
+		nb[0] = '0';
+		nb[1] = '\0';
 	}
-	nb[index] = '\0';
+	else
+	{
+		for (index = 0, temp = (unsigned int) num; temp > 0; index++)
+		{
+			nb[index] = (temp % 10) + '0'; /* get last digit */
+			temp = temp / 10; /* remove last digit */
+		}
+		nb[index] = '\0';
+	}
 
 	/* write number to stdout */
 	for (index = _strlen(nb); index >  0; index--)
@@ -109,12 +117,20 @@ int p_integer(va_list args)
 	}
 
 	/* convert num to string */
-	for (index = 0, temp = (unsigned int) num; temp > 0; index++)
+	if (num == 0)
 	{
-		str_n[index] = buffer[temp % 10]; /* get last digit */
-		temp /= 10; /* remove last digit */
+		str_n[0] = '0';
+		str_n[1] = '\0';
 	}
-	str_n[index] = '\0';
+	else
+	{
+		for (index = 0, temp = (unsigned int) num; temp > 0; index++)
+		{
+			str_n[index] = buffer[temp % 10]; /* get last digit */
+			temp /= 10; /* remove last digit */
+		}
+		str_n[index] = '\0';
+	}
 
 	/* write number to stdout */
 	for (index = _strlen(str_n); index > 0; index--)
