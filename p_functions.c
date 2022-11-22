@@ -26,7 +26,7 @@ int p_string(va_list args)
 	s = va_arg(args, char *);
 
 	if (s == NULL)
-		s = "(nil)";
+		s = "(null)";
 
 	return (_puts(s));
 }
