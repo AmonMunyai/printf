@@ -47,3 +47,28 @@ int _strlen(const char *s)
 
 	return (index);
 }
+
+/**
+ * get_p - selects the correct function to perform
+ * @s: specifies the type of conversion to be applied
+ * Return: pointer to function corresponding to conversion specifier
+ */
+
+int (*get_p(char s))(va_list)
+{
+	int index;
+	op_t ops[] = {{"c", p_char},
+		{"s", p_string},
+		{"d", p_decimal},
+		{"i", p_integer},
+		{"b", p_binary},
+		{NULL, NULL}
+	};
+
+	index = 0;
+
+	while (ops[index].s != NULL && *(ops[index].s) != s)
+		index++;
+
+	return (ops[index].f);
+}
