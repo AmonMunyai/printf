@@ -32,9 +32,9 @@ int p_string(va_list args)
 }
 
 /**
- * p_decimal - writes a base 10 number to stdout as string
+ * p_decimal - writes a base 10 number to stdout as a string
  * @args: variable argument list
- * Return: number of bytes in string number
+ * Return: number of bytes in the string number
  */
 
 int p_decimal(va_list args)
@@ -91,4 +91,28 @@ int p_integer(va_list args)
 	len = p_decimal(args);
 
 	return (len);
+}
+
+/**
+ * get_p - selects the correct function to perform
+ * @s: specifies the type of conversion to be applied
+ * Return: pointer to function corresponding to conversion specifier
+ */
+
+int (*get_p(char s))(va_list)
+{
+	op_t ops[] = {
+		{"c", p_char},
+		{"s", p_string},
+		{"d", p_decimal},
+		{"i", p_integer},
+		{NULL, NULL}
+	};
+
+	int index;
+
+	for (index = 0; ops[index].s != NULL && *(ops[index].s) != s; index++)
+		;
+
+	return (ops[index].f);
 }
